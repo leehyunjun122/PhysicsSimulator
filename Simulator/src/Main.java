@@ -12,7 +12,11 @@ public class Main {
 	static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-        JFrame frame = new JFrame("simulator");
+		new Main();
+	}
+	
+	Main(){
+		JFrame frame = new JFrame("simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(1000,700));
         
@@ -40,16 +44,6 @@ public class Main {
         JButton button = new JButton("Enter");
         button.setBounds(700, 220, 80, 25);
         panel.add(button);
-        
-        JLabel writing = new JLabel();
-		writing.setBounds(100,40,160,25);
-        for(int i=0;i<5;i++) {
-        	String expression = input.nextLine();
-        	for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(2);stop>System.nanoTime();) {
-        			writing = new JLabel(expression);
-        			panel.add(writing);
-        	}
-        }
 	}
 	
 	public static boolean writingChecker(JTextField statement) {
