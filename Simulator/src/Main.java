@@ -11,8 +11,9 @@ import javax.swing.JButton;
 import java.awt.event.*;
 
 public class Main implements ActionListener {
-	static JTextField userText;
-	static JTextArea text;
+	static JFrame frame = new JFrame("simulator");
+	private static JTextField userText;
+	private static JTextArea text;
 	static Scanner input = new Scanner(System.in);
 	static JLabel words = new JLabel();
 	static ActionListener statement;
@@ -22,7 +23,6 @@ public class Main implements ActionListener {
 	}
 	
 	Main(){
-		JFrame frame = new JFrame("simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(1000,700));
         
@@ -33,7 +33,7 @@ public class Main implements ActionListener {
         frame.setVisible(true);
 	}
 	
-	public static void placeComponents(JPanel panel) {
+	public void placeComponents(JPanel panel) {
 		panel.setLayout(null);
 		JLabel title = new JLabel("Welcome to the simulator");
 		title.setBounds(100,30,160,25);
@@ -53,7 +53,8 @@ public class Main implements ActionListener {
         JButton button = new JButton("Enter");
         button.setBounds(700, 220, 80, 25);
         panel.add(button);
-        button.addActionListener(statement);
+        button.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) {} });
+        button.addActionListener(this);
         
         panel.setBackground(Color.pink);
 	}
@@ -68,9 +69,11 @@ public class Main implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent a) {
+		try{
 		String writing = a.getActionCommand();
 		if(writing.equals("Enter")) {  
             words.setText(text.getText()); 
         }
+		}catch(Exception ex) {System.out.println(ex);}
 	}
 }
