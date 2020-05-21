@@ -1,39 +1,83 @@
+package Display;
+
+//user interaction
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+//java swing
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.*;
 
-public class Main implements ActionListener {
-	static JFrame frame = new JFrame("simulator");
-	private static JTextField userText;
+public class Display implements ActionListener {
+
+	private JFrame frame;
+	private Canvas canvas;
 	private static JTextArea text;
-	static Scanner input = new Scanner(System.in);
 	static JLabel words = new JLabel();
-	static ActionListener statement;
 	
-	public static void main(String[] args) {
-		new Main();
+	private String title;
+	private int length, height;
+	
+	public Display(String t, int l, int h) {
+		title = t;
+		length = l;
+		height = h;
+		create();
 	}
 	
-	Main(){
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(1000,700));
-        
-        JPanel panel = new JPanel();
+	private void create() {
+		frame = new JFrame(title);
+		frame.setSize(length, height);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		
+		JPanel panel = new JPanel();
+		panel.setSize(500, 400);
         frame.add(panel);
-        placeComponents(panel);
-        
-        frame.setVisible(true);
+        addComponents(panel);
+		
+		frame.setVisible(true);
+		
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(length, height));
+		canvas.setMinimumSize(new Dimension(length, height));
+		canvas.setMaximumSize(new Dimension(length, height));
+		
+		frame.add(canvas);
+		//frame.pack(); if ok
 	}
 	
-	public void placeComponents(JPanel panel) {
+	public Canvas getCanvas() {
+		return canvas;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void addComponents(JPanel panel) {
 		panel.setLayout(null);
 		JLabel title = new JLabel("Welcome to the simulator");
 		title.setBounds(100,30,160,25);
@@ -58,16 +102,7 @@ public class Main implements ActionListener {
         
         panel.setBackground(Color.pink);
 	}
-	
-	public static boolean writingChecker(JTextField statement) {
-		if(statement != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
-	@Override
 	public void actionPerformed(ActionEvent a) {
 		try{
 		String writing = a.getActionCommand();
