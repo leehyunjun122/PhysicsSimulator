@@ -3,8 +3,10 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import Display.Display;
+import graphics.Loader;
 
 public class Runner implements Runnable{
 	
@@ -21,6 +23,8 @@ public class Runner implements Runnable{
 	private BufferStrategy buffer;
 	private Graphics graphic;
 	
+	private BufferedImage picture;
+	
 	public Runner(String title, int l, int h) {
 		this.title = title;
 		length = l;
@@ -29,6 +33,7 @@ public class Runner implements Runnable{
 	
 	private void initialize() {
 		display = new Display(title,length,height);
+		picture = Loader.loadImage("/Image/ball.png");
 	}
 	
 	private void update() {
@@ -36,21 +41,16 @@ public class Runner implements Runnable{
 	}
 	
 	private void render() {
-		/*buffer = display.getCanvas().getBufferStrategy();
+		buffer = display.getCanvas().getBufferStrategy();
 		if(buffer == null) {
 			display.getCanvas().createBufferStrategy(3);//three should be enough/maximum(i guess?) buffers we need
 			return;
 		}
 		graphic = buffer.getDrawGraphics();
-		graphic.clearRect(0, 0, length, height);
-		
-		//drawing
-		graphic.setColor(Color.CYAN);
-		graphic.fillRect(0, 0, 50, 50);
-		
-		
+		graphic.clearRect(0, 0, length, height);		
+		graphic.drawImage(picture, 20, 20, null);
 		buffer.show();
-		graphic.dispose();*/
+		graphic.dispose();
 	}
 	
 	public void run() {

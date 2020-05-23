@@ -37,10 +37,10 @@ public class Display implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		panel.setSize(500, 400);
         frame.add(panel);
-        addComponents(panel);
+        addComponents(panel);*/
 		
 		frame.setVisible(true);
 		
