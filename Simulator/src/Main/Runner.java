@@ -36,8 +36,18 @@ public class Runner implements Runnable{
 		picture = Loader.loadImage("/Image/ball.png");
 	}
 	
+	int x;
+	int y=20;
+	
 	private void update() {
-		
+		if(x<=300) {
+			x+=1;
+			y+=1;
+		} else if (x>=300&&x<=500) {
+			x+=1;
+		} else {
+			return;
+		}	
 	}
 	
 	private void render() {
@@ -48,7 +58,7 @@ public class Runner implements Runnable{
 		}
 		graphic = buffer.getDrawGraphics();
 		graphic.clearRect(0, 0, length, height);		
-		graphic.drawImage(picture, 20, 20, null);
+		graphic.drawImage(picture, x, y, null);
 		buffer.show();
 		graphic.dispose();
 	}
@@ -56,9 +66,31 @@ public class Runner implements Runnable{
 	public void run() {
 		initialize();
 		
+		int fps = 150;
+		double maxNum = 1000000000/fps;//the maximum number of times that update should run every second to achieve 60 fps
+		double delta = 0;//the change
+		long currentChange;
+		long current = System.nanoTime();//its the current time
+		long FPSChecker = 0;//checking if the system is well conducting
+		int count = 0;
+		
 		while(running) {
-			update();
-			render();
+			currentChange = System.nanoTime();//using nanosecond = small enough to be very accurate
+			delta += (currentChange - current)/maxNum;
+			FPSChecker += (currentChange - current);
+			current = currentChange;
+			
+			if(delta >= 1) {
+				update();
+				render();
+				count++;
+				delta--;
+			}
+			if(FPSChecker>=1000000000) {
+				System.out.println("FPS: " + count);
+				FPSChecker = 0;
+				count = 0;
+			}
 		}
 		
 		end();
