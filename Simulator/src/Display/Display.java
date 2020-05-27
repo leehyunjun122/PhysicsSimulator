@@ -57,7 +57,9 @@ public class Display implements ActionListener {
 		return canvas;
 	}
 	
-	
+	public JFrame getFrame() {
+		return frame;
+	}
 	
 	
 	

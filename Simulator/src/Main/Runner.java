@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import Display.Display;
+import Input.KeyManager;
 import graphics.Loader;
 
 public class Runner implements Runnable{
@@ -25,19 +26,25 @@ public class Runner implements Runnable{
 	
 	private BufferedImage picture;
 	
+	//time
+	int x;
+	int y=20;
+	
+	//inputs: keyboard
+	private KeyManager key;
+	
 	public Runner(String title, int l, int h) {
 		this.title = title;
 		length = l;
 		height = h;
+		key = new KeyManager();
 	}
 	
 	private void initialize() {
 		display = new Display(title,length,height);
 		picture = Loader.loadImage("/Image/ball.png");
+		display.getFrame().addKeyListener(key);
 	}
-	
-	int x;
-	int y=20;
 	
 	private void update() {
 		if(x<=300) {
@@ -47,7 +54,8 @@ public class Runner implements Runnable{
 			x+=1;
 		} else {
 			return;
-		}	
+		}
+		key.update();
 	}
 	
 	private void render() {
@@ -57,7 +65,9 @@ public class Runner implements Runnable{
 			return;
 		}
 		graphic = buffer.getDrawGraphics();
-		graphic.clearRect(0, 0, length, height);		
+		graphic.clearRect(0, 0, length, height);
+		graphic.setColor(Color.pink);
+		graphic.fillRect(0, 0, length, height);
 		graphic.drawImage(picture, x, y, null);
 		buffer.show();
 		graphic.dispose();
@@ -95,6 +105,10 @@ public class Runner implements Runnable{
 		
 		end();
 		
+	}
+	
+	public KeyManager getKey() {
+		return key;
 	}
 	
 	//for the run
