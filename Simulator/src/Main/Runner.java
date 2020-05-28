@@ -33,6 +33,9 @@ public class Runner implements Runnable{
 	//inputs: keyboard
 	private KeyManager key;
 	
+	//handling object
+	private Handler handler;
+	
 	public Runner(String title, int l, int h) {
 		this.title = title;
 		length = l;
@@ -69,6 +72,8 @@ public class Runner implements Runnable{
 		graphic.setColor(Color.pink);
 		graphic.fillRect(0, 0, length, height);
 		graphic.drawImage(picture, x, y, null);
+		//handler
+		handler = new Handler(this);
 		buffer.show();
 		graphic.dispose();
 	}
@@ -109,6 +114,14 @@ public class Runner implements Runnable{
 	
 	public KeyManager getKey() {
 		return key;
+	}
+	
+	public int getLength() {
+		return length;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
 	//for the run
