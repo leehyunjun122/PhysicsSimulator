@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 
 import Display.Display;
 import Input.KeyManager;
+import States.ExperimentState;
+import States.SimulatingState;
+import States.State;
 import graphics.Loader;
 
 public class Runner implements Runnable{
@@ -29,6 +32,10 @@ public class Runner implements Runnable{
 	//time
 	int x;
 	int y=20;
+
+	//States
+	public State simulator;
+	public State experiment;
 	
 	//inputs: keyboard
 	private KeyManager key;
@@ -47,6 +54,15 @@ public class Runner implements Runnable{
 		display = new Display(title,length,height);
 		picture = Loader.loadImage("/Image/ball.png");
 		display.getFrame().addKeyListener(key);
+		
+		
+		//handler
+		handler = new Handler(this);
+		
+		//state
+		simulator = new SimulatingState(handler);
+		experiment = new ExperimentState(handler);
+		State.setState(experiment);
 	}
 	
 	private void update() {
@@ -59,6 +75,10 @@ public class Runner implements Runnable{
 			return;
 		}
 		key.update();
+		
+		if(State.getState() != null) {
+			State.getState().update();
+		}
 	}
 	
 	private void render() {
@@ -69,11 +89,20 @@ public class Runner implements Runnable{
 		}
 		graphic = buffer.getDrawGraphics();
 		graphic.clearRect(0, 0, length, height);
-		graphic.setColor(Color.pink);
-		graphic.fillRect(0, 0, length, height);
-		graphic.drawImage(picture, x, y, null);
-		//handler
-		handler = new Handler(this);
+		if(State.getState() == simulator)
+			graphic.setColor(Color.pink);
+			graphic.fillRect(0, 0, length, height);
+		if(State.getState() == experiment)
+			graphic.setColor(Color.white);
+			graphic.fillRect(0, 0, length, height);
+			
+
+		graphic.drawImage(picture, x, y, null);	
+		
+		if(State.getState() != null) {
+			State.getState().draw(graphic);
+		}
+		
 		buffer.show();
 		graphic.dispose();
 	}
