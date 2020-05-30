@@ -62,7 +62,7 @@ public class Runner implements Runnable{
 		//state
 		simulator = new SimulatingState(handler);
 		experiment = new ExperimentState(handler);
-		State.setState(experiment);
+		State.setState(simulator);
 	}
 	
 	private void update() {
@@ -131,7 +131,6 @@ public class Runner implements Runnable{
 				delta--;
 			}
 			if(FPSChecker>=1000000000) {
-				System.out.println("FPS: " + count);
 				FPSChecker = 0;
 				count = 0;
 			}

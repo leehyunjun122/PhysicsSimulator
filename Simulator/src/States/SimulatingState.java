@@ -3,21 +3,25 @@ package States;
 import java.awt.Graphics;
 
 import Main.Handler;
-import Main.Runner;
+import Entities.Element;
 
 public class SimulatingState extends State{
-	//shows the simulation
+
+	private Element ball;
 	
 	public SimulatingState(Handler handler) {
 		super(handler);
+		ball = new Element(handler,300,300);
 	}
 	
 	@Override
 	public void update() {
+		ball.update();
 	}
 
 	@Override
 	public void draw(Graphics g) {
+		ball.draw(g);
 	}
 
 }
