@@ -3,14 +3,13 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import Display.Display;
 import Manager.KeyManager;
 import States.ExperimentState;
 import States.SimulatingState;
 import States.State;
-import graphics.Loader;
+import graphics.Input;
 
 public class Runner implements Runnable{
 	
@@ -26,12 +25,6 @@ public class Runner implements Runnable{
 	//for the buffer and graphics
 	private BufferStrategy buffer;
 	private Graphics graphic;
-	
-	private BufferedImage picture;
-	
-	//time
-	int x;
-	int y=20;
 
 	//States
 	public State simulator;
@@ -52,9 +45,10 @@ public class Runner implements Runnable{
 	
 	private void initialize() {
 		display = new Display(title,length,height);
-		picture = Loader.loadImage("/Image/ball.png");
 		display.getFrame().addKeyListener(key);
 		
+		//initializing all the necessary materials at once
+		Input.initialize();
 		
 		//handler
 		handler = new Handler(this);
@@ -66,14 +60,6 @@ public class Runner implements Runnable{
 	}
 	
 	private void update() {
-		if(x<=300) {
-			x+=1;
-			y+=1;
-		} else if (x>=300&&x<=500) {
-			x+=1;
-		} else {
-			return;
-		}
 		key.update();
 		
 		if(State.getState() != null) {
@@ -94,10 +80,7 @@ public class Runner implements Runnable{
 			graphic.fillRect(0, 0, length, height);
 		if(State.getState() == experiment)
 			graphic.setColor(Color.white);
-			graphic.fillRect(0, 0, length, height);
-			
-
-		graphic.drawImage(picture, x, y, null);	
+			graphic.fillRect(0, 0, length, height);	
 		
 		if(State.getState() != null) {
 			State.getState().draw(graphic);
@@ -116,7 +99,6 @@ public class Runner implements Runnable{
 		long currentChange;
 		long current = System.nanoTime();//its the current time
 		long FPSChecker = 0;//checking if the system is well conducting
-		int count = 0;
 		
 		while(running) {
 			currentChange = System.nanoTime();//using nanosecond = small enough to be very accurate
@@ -127,12 +109,10 @@ public class Runner implements Runnable{
 			if(delta >= 1) {
 				update();
 				render();
-				count++;
 				delta--;
 			}
 			if(FPSChecker>=1000000000) {
 				FPSChecker = 0;
-				count = 0;
 			}
 		}
 		

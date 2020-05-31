@@ -11,7 +11,7 @@ public class Input {
 		
 		public static void initialize() {//only called once
 			//there will be more later on
-			ball = Loader.loadImage("/images/ball.png");
+			ball = Loader.loadImage("/Image/ball.png");
 			
 		}
 
