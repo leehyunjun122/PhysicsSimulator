@@ -1,4 +1,4 @@
-package Input;
+package Manager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,13 +22,13 @@ public class KeyManager implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
-		System.out.println("pressing");
+		//System.out.println("pressing");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
-		System.out.println("released");
+		//System.out.println("released");
 	}
 
 	@Override

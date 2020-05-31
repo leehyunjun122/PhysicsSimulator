@@ -6,7 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import Display.Display;
-import Input.KeyManager;
+import Manager.KeyManager;
 import States.ExperimentState;
 import States.SimulatingState;
 import States.State;

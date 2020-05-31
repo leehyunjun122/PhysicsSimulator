@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Display implements ActionListener {
 
@@ -60,7 +61,10 @@ public class Display implements ActionListener {
 	public JFrame getFrame() {
 		return frame;
 	}
-	
+
+	public JTextArea getText() {
+		return text;
+	}
 	
 	
 	

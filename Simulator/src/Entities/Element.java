@@ -3,15 +3,14 @@ package Entities;
 import java.awt.Graphics;
 
 import Main.Handler;
-import Main.Runner;
-import graphics.Loader;
+import graphics.Input;
 
 public class Element extends Entity{
 
 	private Handler handler;
 	
 	protected float speed;
-	public static final float NORMAL_SPEED = 3.0f;
+	public static final float REGULAR_SPEED = 3.0f;
 	public static final int HEIGHT = 150,
 							LENGTH = 150;
 	protected float xChange, yChange;
@@ -19,7 +18,7 @@ public class Element extends Entity{
 	public Element(Handler handler, float xPosition, float yPosition) {
 		super(handler, xPosition, yPosition, LENGTH, HEIGHT);
 		this.handler = handler;
-		speed = NORMAL_SPEED;
+		speed = REGULAR_SPEED;
 	}
 	
 	public void move() {
@@ -73,7 +72,7 @@ public class Element extends Entity{
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(Loader.loadImage("/Image/ball.png"), (int) x, (int) y, length, height, null);
+		g.drawImage(Input.ball, (int) x, (int) y, length, height, null);
 	}
 
 }

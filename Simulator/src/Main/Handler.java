@@ -1,6 +1,6 @@
 package Main;
 
-import Input.KeyManager;
+import Manager.KeyManager;
 
 public class Handler {
 
