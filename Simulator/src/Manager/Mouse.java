@@ -5,8 +5,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class Mouse implements MouseListener, MouseMotionListener{
-
+//to recognize and manage the mouse control
 		private boolean leftPressed, rightPressed, roller; //the right and left clicks plus pressing the rolling thing on mouse
+		//true when pressed while false when released
 		private int xPosition, yPosition;
 		
 		public Mouse() {//constructor

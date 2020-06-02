@@ -1,6 +1,6 @@
 package Main;
 
-import Manager.KeyManager;
+import Manager.Keyboard;
 
 public class Handler {
 
@@ -18,7 +18,7 @@ public class Handler {
 		return simulator.getHeight();
 	}
 	
-	public KeyManager getKey() {
+	public Keyboard getKey() {
 		return simulator.getKey();
 	}
 	public Runner getSimulator() {

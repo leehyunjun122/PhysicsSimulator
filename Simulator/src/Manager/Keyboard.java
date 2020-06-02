@@ -3,12 +3,12 @@ package Manager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyManager implements KeyListener {
-
+public class Keyboard implements KeyListener {
+//to recognize and manage the keyboard control
 	private boolean[] keys;
 	public boolean up, down, left, right;
 	
-	public KeyManager() {
+	public Keyboard() {
 		keys = new boolean[300];
 	}
 	

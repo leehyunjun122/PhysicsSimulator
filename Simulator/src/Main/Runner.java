@@ -5,7 +5,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import Display.Display;
-import Manager.KeyManager;
+import Manager.Keyboard;
+import Manager.Mouse;
 import States.ExperimentState;
 import States.SimulatingState;
 import States.State;
@@ -30,8 +31,9 @@ public class Runner implements Runnable{
 	public State simulator;
 	public State experiment;
 	
-	//inputs: keyboard
-	private KeyManager key;
+	//managers: keyboard, mouse
+	private Keyboard key;
+	private Mouse mouse;
 	
 	//handling object
 	private Handler handler;
@@ -40,12 +42,19 @@ public class Runner implements Runnable{
 		this.title = title;
 		length = l;
 		height = h;
-		key = new KeyManager();
+		key = new Keyboard();
+		mouse = new Mouse();
 	}
 	
 	private void initialize() {
 		display = new Display(title,length,height);
+		//keyboard
 		display.getFrame().addKeyListener(key);
+		//mouse
+		display.getFrame().addMouseListener(mouse);
+		display.getFrame().addMouseMotionListener(mouse);
+		display.getCanvas().addMouseListener(mouse);
+		display.getCanvas().addMouseMotionListener(mouse);
 		
 		//initializing all the necessary materials at once
 		Input.initialize();
@@ -75,6 +84,8 @@ public class Runner implements Runnable{
 		}
 		graphic = buffer.getDrawGraphics();
 		graphic.clearRect(0, 0, length, height);
+		
+		//color setting for each state
 		if(State.getState() == simulator)
 			graphic.setColor(Color.pink);
 			graphic.fillRect(0, 0, length, height);
@@ -98,12 +109,12 @@ public class Runner implements Runnable{
 		double delta = 0;//the change
 		long currentChange;
 		long current = System.nanoTime();//its the current time
-		long FPSChecker = 0;//checking if the system is well conducting
+		long checker = 0;//checking if the system is well conducting
 		
 		while(running) {
 			currentChange = System.nanoTime();//using nanosecond = small enough to be very accurate
 			delta += (currentChange - current)/maxNum;
-			FPSChecker += (currentChange - current);
+			checker += (currentChange - current);
 			current = currentChange;
 			
 			if(delta >= 1) {
@@ -111,8 +122,8 @@ public class Runner implements Runnable{
 				render();
 				delta--;
 			}
-			if(FPSChecker>=1000000000) {
-				FPSChecker = 0;
+			if(checker>=1000000000) {
+				checker = 0;
 			}
 		}
 		
@@ -120,8 +131,12 @@ public class Runner implements Runnable{
 		
 	}
 	
-	public KeyManager getKey() {
+	public Keyboard getKey() {
 		return key;
+	}
+	
+	public Mouse getMouse() {
+		return mouse;
 	}
 	
 	public int getLength() {
