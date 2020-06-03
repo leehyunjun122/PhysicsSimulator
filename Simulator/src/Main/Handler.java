@@ -1,6 +1,7 @@
 package Main;
 
 import Manager.Keyboard;
+import Manager.Mouse;
 
 public class Handler {
 
@@ -21,6 +22,11 @@ public class Handler {
 	public Keyboard getKey() {
 		return simulator.getKey();
 	}
+	
+	public Mouse getMouse() {
+		return simulator.getMouse();
+	}
+	
 	public Runner getSimulator() {
 		return simulator;
 	}

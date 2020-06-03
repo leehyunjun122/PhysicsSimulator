@@ -9,9 +9,14 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		private boolean leftPressed, rightPressed, roller; //the right and left clicks plus pressing the rolling thing on mouse
 		//true when pressed while false when released
 		private int xPosition, yPosition;
+		private UI manager;
 		
 		public Mouse() {//constructor
 			
+		}
+		
+		public void setUIManager(UI manager) {
+			this.manager = manager;
 		}
 		
 		public boolean pressingLeft() {
@@ -53,6 +58,9 @@ public class Mouse implements MouseListener, MouseMotionListener{
 				rightPressed = false;
 			else if(m.getButton() == MouseEvent.BUTTON2)
 				roller = false;
+			
+			if(manager != null)
+				manager.onMouseRelease(m);
 		}
 		
 		@Override

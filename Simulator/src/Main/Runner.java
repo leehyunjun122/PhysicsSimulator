@@ -65,7 +65,7 @@ public class Runner implements Runnable{
 		//state
 		simulator = new SimulatingState(handler);
 		experiment = new ExperimentState(handler);
-		State.setState(simulator);
+		State.setState(experiment);
 	}
 	
 	private void update() {
