@@ -17,6 +17,8 @@ public class SimulatingState extends State{
 	@Override
 	public void update() {
 		ball.update();
+		if(handler.getMouse().pressingLeft() || handler.getMouse().pressingRight())
+			State.setState(handler.getSimulator().experiment);
 	}
 
 	@Override

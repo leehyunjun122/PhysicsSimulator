@@ -72,6 +72,9 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		public void mouseMoved(MouseEvent m) {
 			xPosition = m.getX();
 			yPosition = m.getY();
+			
+			if(manager != null)
+				manager.onMouseMove(m);
 		}
 
 		@Override

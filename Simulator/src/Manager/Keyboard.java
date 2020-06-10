@@ -22,13 +22,12 @@ public class Keyboard implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
-		//System.out.println("pressing");
+		System.out.println("pressed");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
-		//System.out.println("released");
 	}
 
 	@Override
