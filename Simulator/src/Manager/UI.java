@@ -8,7 +8,7 @@ import Main.Handler;
 import UI.UIObject;
 
 public class UI {
-
+	//to recognize and manage the UI
 	private Handler handler;
 	private ArrayList<UIObject> object;
 		

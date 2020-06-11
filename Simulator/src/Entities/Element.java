@@ -11,8 +11,8 @@ public class Element extends Entity{
 	
 	protected float speed;
 	public static final float REGULAR_SPEED = 3.0f;
-	public static final int HEIGHT = 150,
-							LENGTH = 150;
+	public static final int HEIGHT = 50,
+							LENGTH = 50;
 	protected float xChange, yChange;
 	
 	public Element(Handler handler, float xPosition, float yPosition) {

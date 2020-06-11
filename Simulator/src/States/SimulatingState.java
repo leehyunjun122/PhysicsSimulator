@@ -11,7 +11,7 @@ public class SimulatingState extends State{
 	
 	public SimulatingState(Handler handler) {
 		super(handler);
-		ball = new Element(handler,300,300);
+		ball = new Element(handler,10,325);
 	}
 	
 	@Override

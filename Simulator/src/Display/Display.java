@@ -49,6 +49,7 @@ public class Display implements ActionListener {
 		canvas.setPreferredSize(new Dimension(length, height));
 		canvas.setMinimumSize(new Dimension(length, height));
 		canvas.setMaximumSize(new Dimension(length, height));
+		canvas.setFocusable(false);
 		
 		frame.add(canvas);
 		//frame.pack(); if ok
